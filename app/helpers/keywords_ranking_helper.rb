@@ -1,0 +1,2 @@
+module KeywordsRankingHelper
+end

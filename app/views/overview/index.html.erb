@@ -1,0 +1,77 @@
+<div class="container pb-5">
+  <%= render 'header' %>
+
+	<div class="header__section">
+  	<h2>Report Overview</h2>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+      <h3>Customer Information</h3>
+
+      <div class="mb-4">
+        <div class="text__font-size--14 text--bold">Customer Domain</div>
+        <div>bonsaifinancial.com</div>
+      </div>
+      <hr>
+      <div class="mb-4">
+        <div class="text__font-size--14 text--bold">High Priority Keywords</div>
+        <ul class="simple-list--no-dots">
+          <li>personal loan leads</li>
+        </ul>
+      </div>
+      <hr>
+      <div class="mb-4">
+        <div class="text__font-size--14 text--bold">Top Competitors</div>
+        <ul class="simple-list--no-dots">
+          <li>nerdwallet.com</li>
+          <li>opploans.com</li>
+          <li>bankrate.com</li>
+          <li>valuepenguin.com</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Card 1 -->
+    <div class="col-sm-12 col-md-8 col-lg-8">
+      <div class="row mb-4">
+        <div class="col-sm-12">
+          <%= render 'panel--da' %>
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <%= render 'panel--total-easy-wins' %>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <%= render 'panel--total-keywords' %>
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <div class="row no no-gutters  mb-4">
+            <div class="col-sm-12">
+              <%= render 'panel--anchor-text-ratio' %>
+            </div>
+          </div>
+          <div class="row no-gutters">
+            <div class="col-sm-12">
+              <%= render 'panel--total-backlinks' %>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-6">
+          <%= render 'panel--top-keywords' %>
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col-sm-12">
+          <%= render 'panel--traffic-sources' %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

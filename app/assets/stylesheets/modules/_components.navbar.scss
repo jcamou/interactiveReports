@@ -1,0 +1,47 @@
+/*------------------------------------*\
+    #NAVBAR
+\*------------------------------------*/
+
+.navbar {
+  padding-left   : 0;
+  padding-right  : 0;
+}
+
+.navbar-collapse {
+  @include media-breakpoint-up(lg) {
+    border-bottom: 2px solid $color__gray--med;
+  }
+
+}
+
+ul.navbar-nav {
+  margin-bottom  : -2px;
+}
+
+.nav-item {
+  font-size      : 14px;
+  font-weight    : $font-weight--bold;
+}
+
+.nav-link {
+  color          : $color__gray--base;
+  border-bottom  : 2px solid $color__gray--med;
+  transition     : all $transition;
+
+  &:hover, &:focus {
+    color        : $color__black--base;
+    border-color : $color__gray--base;
+  }
+
+  &.active {
+    color        : $color__blue--base;
+    border-color : $color__blue--base;
+  }
+}
+
+// Bootstrap override
+.navbar-expand-lg .nav-item .nav-link {
+  padding-right  : 0;
+  padding-left   : 0;
+  margin-right   : 30px;
+}
