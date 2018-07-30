@@ -21,6 +21,7 @@
  * Headers..............Styles for page and section headers.
  * Navbar...............Override CSS for the global navigation bar. 
  * Progress Chart.......Styles for progress bar charts. 
+ * Gauge................Styles for gauge component.
  *
  * TRUMPS
  * Type.................Text helpers.
@@ -63,6 +64,7 @@
 @import "modules/components.headers";
 @import "modules/components.navbar";
 @import "modules/components.progress-chart";
+@import "modules/components.gauge";
 
 
 /**

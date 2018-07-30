@@ -1,0 +1,128 @@
+<div class="container mb-5">
+  <%= render 'header' %>
+  <div class="header__section">
+    <h2>Anchor Text Profile</h2>
+     <p>Your easy wins are the keywords you are currently ranking for, have a relatively low competition, and also have a CPC value.</p>
+   </div>
+
+  <div class="row mb-4">
+    <div class="col-sm-12 col-md-4 col-lg-4">
+      <%= render 'panel--anchor-text-ratio' %>
+    </div>
+    <div class="col-sm-12 col-md-4 col-lg-4">
+      <%= render 'panel--total-backlinks' %>
+    </div>
+    <div class="col-sm-12 col-md-4 col-lg-4">
+      <div class="card panel">
+        <div class="panel__title">About Text Ratio</div>
+        <p class="text__font-size--14">You want to start off with a healthy number of Natural Links to avoid being penalized by search engines.</p>
+        <a href="#" class="text__font-size--14">Learn More</a>
+      </div>
+    </div>
+  </div>
+
+
+    <div class="clearfix mb-2">
+      <a class="btn btn-link float-right" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        What do the columns mean?
+      </a>
+    </div>
+
+    <div class="collapse" id="collapseExample">
+      <hr>
+      <div class="container">
+        <div class="text__font-size--18 mb-4">Column Definitions</div>
+        <div class="row">
+          <div class="col-sm-12 col-md-4 col-lg-3">
+            <div class="text__font-size--12 text--bold">Keyword</div>
+            <p class="text__font-size--12">The word/phrase you are ranking for in Google.</p>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-3">
+            <div class="text__font-size--12 text--bold">Position - Now</div>
+            <p class="text__font-size--12">Your current position.</p>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-3">
+            <div class="text__font-size--12 text--bold">Position - Past</div>
+            <p class="text__font-size--12">Past rank position.</p>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-3">
+            <div class="text__font-size--12 text--bold">Position - Trend</div>
+            <p class="text__font-size--12">Indicates the movement in position</p>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-3">
+            <div class="text__font-size--12 text--bold">Volume</div>
+            <p class="text__font-size--12">Total searches per month</p>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-3">
+            <div class="text__font-size--12 text--bold">URL</div>
+            <p class="text__font-size--12">The page ranking for that keyword</p>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-3">
+            <div class="text__font-size--12 text--bold">Difficult</div>
+            <p class="text__font-size--12">Competition level from 0 - 100 with 100 being the most competitive.</p>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-3">
+            <div class="text__font-size--12 text--bold">Traffic</div>
+            <p class="text__font-size--12">Current estimated organic traffic to your site for this keyword.</p>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-3">
+            <div class="text__font-size--12 text--bold">CPC</div>
+            <p class="text__font-size--12">Estimated Cost Per Click value.</p>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-3">
+            <div class="text__font-size--12 text--bold">Priority</div>
+            <p class="text__font-size--12">Our calculated priority of each item based on research.</p>
+          </div>
+        </div>
+      </div>
+      <hr class="mb-5">
+    </div>
+   <div class="table-responsive">
+     <table class="table table-sm hoth-tables">
+      <thead>
+        <tr>
+          <th scope="col">Anchor Text</th>
+          <th class="text__align--right" scope="col">Backlinks</th>
+          <th></th>
+          <th></th>
+          <th class="text__align--right" scope="col">Domain</th>
+          <th scope="col">First Seen</th>
+          <th scope="col">Last Seen</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>find out more</td>
+          <td class="text__align--right">374</td>
+          <td class="text__align--right">52%</td>
+          <td>
+            <div class="pc pc--thin">
+              <div class="pc__item-column" style="width: 75%;"></div>
+            </div>
+          </td>
+          <td class="text__align--right">3</td>
+          <td>Jul 10, 2018</td>
+          <td>Jul 18, 2018</td>
+        </tr>
+        <tr>
+          <td>bonsai finance</td>
+          <td class="text__align--right">184</td>
+          <td class="text__align--right">4%</td>
+          <td></td>
+          <td class="text__align--right">39</td>
+          <td>Jul 10, 2018</td>
+          <td>Jul 18, 2018</td>
+        </tr>
+        <tr>
+          <td>bonsaifinance.com</td>
+          <td class="text__align--right">57</td>
+          <td class="text__align--right">.02%</td>
+          <td></td>
+          <td class="text__align--right">9</td>
+          <td>Jul 10, 2018</td>
+          <td>Jul 18, 2018</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
