@@ -16,5 +16,6 @@
 //= require jquery3
 //= require popper
 //= require bootstrap
+//= require moment
 //= require Chart.min
 //= require_tree .

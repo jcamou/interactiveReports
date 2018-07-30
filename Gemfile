@@ -33,6 +33,9 @@ gem 'bootstrap', '~> 4.1.2'
 # Use jQuery 5.1
 gem 'jquery-rails'
 
+# Use momentsjs
+gem 'momentjs-rails'
+
 # Use Chartsjs
 gem 'chart-js-rails'
 

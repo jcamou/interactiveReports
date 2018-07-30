@@ -45,3 +45,14 @@ ul.navbar-nav {
   padding-left   : 0;
   margin-right   : 30px;
 }
+
+.navbar-toggler {
+  width: 100%;
+  border-bottom: 2px solid $color__gray--med;
+  font-weight: $font-weight--bold;
+  text-align: left;
+  font-size: 14px;
+  color: $color__black--base;
+  padding-left: 0;
+  border-radius: 0;
+}

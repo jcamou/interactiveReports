@@ -2,7 +2,7 @@
   <%= render 'header' %>
   <div class="header__section">
     <h2>Anchor Text Profile</h2>
-     <p>Your easy wins are the keywords you are currently ranking for, have a relatively low competition, and also have a CPC value.</p>
+     <p>Anchor Text refers to the clickable text in a link. Best practice is to have a variety of different types to prevent over optimization, including exact match, partial match, and natural anchors.</p>
    </div>
 
   <div class="row mb-4">
@@ -34,44 +34,24 @@
         <div class="text__font-size--18 mb-4">Column Definitions</div>
         <div class="row">
           <div class="col-sm-12 col-md-4 col-lg-3">
-            <div class="text__font-size--12 text--bold">Keyword</div>
-            <p class="text__font-size--12">The word/phrase you are ranking for in Google.</p>
+            <div class="text__font-size--12 text--bold">Anchor Text</div>
+            <p class="text__font-size--12">The clickable text of a backlink.</p>
           </div>
           <div class="col-sm-12 col-md-4 col-lg-3">
-            <div class="text__font-size--12 text--bold">Position - Now</div>
-            <p class="text__font-size--12">Your current position.</p>
+            <div class="text__font-size--12 text--bold">Backlinks</div>
+            <p class="text__font-size--12">The number of backlinks that include the given anchor text.</p>
           </div>
           <div class="col-sm-12 col-md-4 col-lg-3">
-            <div class="text__font-size--12 text--bold">Position - Past</div>
-            <p class="text__font-size--12">Past rank position.</p>
+            <div class="text__font-size--12 text--bold">Domains</div>
+            <p class="text__font-size--12">The number of domains whose backlinks include the given anchor text.</p>
           </div>
           <div class="col-sm-12 col-md-4 col-lg-3">
-            <div class="text__font-size--12 text--bold">Position - Trend</div>
-            <p class="text__font-size--12">Indicates the movement in position</p>
+            <div class="text__font-size--12 text--bold">First Seen</div>
+            <p class="text__font-size--12">The date we first noticed the anchor text.</p>
           </div>
           <div class="col-sm-12 col-md-4 col-lg-3">
-            <div class="text__font-size--12 text--bold">Volume</div>
-            <p class="text__font-size--12">Total searches per month</p>
-          </div>
-          <div class="col-sm-12 col-md-4 col-lg-3">
-            <div class="text__font-size--12 text--bold">URL</div>
-            <p class="text__font-size--12">The page ranking for that keyword</p>
-          </div>
-          <div class="col-sm-12 col-md-4 col-lg-3">
-            <div class="text__font-size--12 text--bold">Difficult</div>
-            <p class="text__font-size--12">Competition level from 0 - 100 with 100 being the most competitive.</p>
-          </div>
-          <div class="col-sm-12 col-md-4 col-lg-3">
-            <div class="text__font-size--12 text--bold">Traffic</div>
-            <p class="text__font-size--12">Current estimated organic traffic to your site for this keyword.</p>
-          </div>
-          <div class="col-sm-12 col-md-4 col-lg-3">
-            <div class="text__font-size--12 text--bold">CPC</div>
-            <p class="text__font-size--12">Estimated Cost Per Click value.</p>
-          </div>
-          <div class="col-sm-12 col-md-4 col-lg-3">
-            <div class="text__font-size--12 text--bold">Priority</div>
-            <p class="text__font-size--12">Our calculated priority of each item based on research.</p>
+            <div class="text__font-size--12 text--bold">Last Seen</div>
+            <p class="text__font-size--12">The date we last noticed the anchor text.</p>
           </div>
         </div>
       </div>
@@ -84,10 +64,10 @@
           <th scope="col">Anchor Text</th>
           <th class="text__align--right" scope="col">Backlinks</th>
           <th></th>
-          <th></th>
+          <th class="align-middle" style="width: 100px;"></th>
           <th class="text__align--right" scope="col">Domain</th>
-          <th scope="col">First Seen</th>
-          <th scope="col">Last Seen</th>
+          <th class="text__align--right" scope="col">First Seen</th>
+          <th class="text__align--right" scope="col">Last Seen</th>
         </tr>
       </thead>
       <tbody>
@@ -95,32 +75,40 @@
           <td>find out more</td>
           <td class="text__align--right">374</td>
           <td class="text__align--right">52%</td>
-          <td>
+          <td class="align-middle" style="width: 100px;">
             <div class="pc pc--thin">
-              <div class="pc__item-column" style="width: 75%;"></div>
+              <div class="pc__item-column" style="width: 52%;"></div>
             </div>
           </td>
           <td class="text__align--right">3</td>
-          <td>Jul 10, 2018</td>
-          <td>Jul 18, 2018</td>
+          <td class="text__align--right">Jul 10, 2018</td>
+          <td class="text__align--right">Jul 18, 2018</td>
         </tr>
         <tr>
           <td>bonsai finance</td>
           <td class="text__align--right">184</td>
           <td class="text__align--right">4%</td>
-          <td></td>
+          <td class="align-middle" style="width: 100px;">
+            <div class="pc pc--thin">
+              <div class="pc__item-column" style="width: 4%;"></div>
+            </div>
+          </td>
           <td class="text__align--right">39</td>
-          <td>Jul 10, 2018</td>
-          <td>Jul 18, 2018</td>
+          <td class="text__align--right">Jul 10, 2018</td>
+          <td class="text__align--right">Jul 18, 2018</td>
         </tr>
         <tr>
           <td>bonsaifinance.com</td>
           <td class="text__align--right">57</td>
           <td class="text__align--right">.02%</td>
-          <td></td>
+          <td class="align-middle" style="width: 100px;">
+            <div class="pc pc--thin">
+              <div class="pc__item-column" style="width: .02%;"></div>
+            </div>
+          </td>
           <td class="text__align--right">9</td>
-          <td>Jul 10, 2018</td>
-          <td>Jul 18, 2018</td>
+          <td class="text__align--right">Jul 10, 2018</td>
+          <td class="text__align--right">Jul 18, 2018</td>
         </tr>
       </tbody>
     </table>

@@ -7,12 +7,7 @@
 
   <div class="row mb-4">
     <div class="col-sm-12 col-md-4 col-lg-4">
-      <div class="card panel">
-        <div class="panel__title">Total Easy Wins</div>
-        <div class="panel__metric">229</div>
-        <div class="panel__trend"></div>
-        <div class="panel__fine-print">Easy Wins are keywords in position 4-30, KD less than 30, and CPC from .01</div>
-      </div>
+      <%= render 'panel--potential-keywords' %>
     </div>
     <div class="col-sm-12 col-md-4 col-lg-4">
       <div class="card panel">
@@ -40,40 +35,24 @@
             <p class="text__font-size--12">The word/phrase you are ranking for in Google.</p>
           </div>
           <div class="col-sm-12 col-md-4 col-lg-3">
-            <div class="text__font-size--12 text--bold">Position - Now</div>
-            <p class="text__font-size--12">Your current position.</p>
-          </div>
-          <div class="col-sm-12 col-md-4 col-lg-3">
-            <div class="text__font-size--12 text--bold">Position - Past</div>
-            <p class="text__font-size--12">Past rank position.</p>
-          </div>
-          <div class="col-sm-12 col-md-4 col-lg-3">
-            <div class="text__font-size--12 text--bold">Position - Trend</div>
-            <p class="text__font-size--12">Indicates the movement in position</p>
-          </div>
-          <div class="col-sm-12 col-md-4 col-lg-3">
             <div class="text__font-size--12 text--bold">Volume</div>
-            <p class="text__font-size--12">Total searches per month</p>
-          </div>
-          <div class="col-sm-12 col-md-4 col-lg-3">
-            <div class="text__font-size--12 text--bold">URL</div>
-            <p class="text__font-size--12">The page ranking for that keyword</p>
+            <p class="text__font-size--12">Total searches per month.</p>
           </div>
           <div class="col-sm-12 col-md-4 col-lg-3">
             <div class="text__font-size--12 text--bold">Difficult</div>
             <p class="text__font-size--12">Competition level from 0 - 100 with 100 being the most competitive.</p>
           </div>
           <div class="col-sm-12 col-md-4 col-lg-3">
-            <div class="text__font-size--12 text--bold">Traffic</div>
-            <p class="text__font-size--12">Current estimated organic traffic to your site for this keyword.</p>
-          </div>
-          <div class="col-sm-12 col-md-4 col-lg-3">
             <div class="text__font-size--12 text--bold">CPC</div>
             <p class="text__font-size--12">Estimated Cost Per Click value.</p>
           </div>
           <div class="col-sm-12 col-md-4 col-lg-3">
-            <div class="text__font-size--12 text--bold">Priority</div>
-            <p class="text__font-size--12">Our calculated priority of each item based on research.</p>
+            <div class="text__font-size--12 text--bold">Trend</div>
+            <p class="text__font-size--12">Shows volume of searches for this keyword over the last 12 months.</p>
+          </div>
+          <div class="col-sm-12 col-md-4 col-lg-3">
+            <div class="text__font-size--12 text--bold">Last Updated</div>
+            <p class="text__font-size--12">Date when the trend line was last updated.</p>
           </div>
         </div>
       </div>
