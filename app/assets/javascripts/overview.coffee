@@ -103,7 +103,10 @@ $(document).ready ->
               type: 'time',
               time: {
                 unit: 'month'
-              }
+              },
+              gridLines: {
+                 display: false,
+               }
               }]
         )
 
@@ -169,7 +172,10 @@ $(document).ready ->
               type: 'time',
               time: {
                 unit: 'month'
-              }
+              },
+              gridLines: {
+                 display: false,
+               }
               }]
         )
 

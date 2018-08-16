@@ -1,110 +1,2479 @@
-<div class="container">
-  <%= render 'header' %>
+<style type="text/css">
+a.table__links {
+color: #007bff;
+}
+.table--shadow {
+box-shadow: 0px 3px 15px 1px rgba(0, 0, 0, 0.04);
+background-color: white;
+border: 1px solid #EDEDED;
+}
+.table--shadow thead th {
+vertical-align: middle;
+border-bottom: 1px solid #EDEDED;
+padding: 12px 4px;
+font-size: 12px;
+color: #808080;
+}
+.table--shadow td {
+border-top: none;
+padding: 12px 4px;
+}
+.table--shadow td:first-of-type {
+padding-left: 12px;
+padding-right: 8px;
+}
+.table--shadow td:last-of-type {
+padding-right: 12px;
+}
+.table--shadow tbody tr:nth-child(even) {
+background-color: #fbf9f9;
+}
+.table--shadow td {
+vertical-align: middle;
+}
+.metric-panel--purple {
+border-color: #7D83FF;
+}
+.metric-panel--pink {
+border-color: #EA526F
+}
+.metric-panel--orange {
+border-color: #FF9B42;
+}
+.metric-panel--blue {
+border-color: #31AFD4;
+}
 
-  <div class="container">
-    <h2>Report Overview</h2>
+.affiliate-panel {
+  background-color: #007bff;
+  color: white;
+  border-radius: 2px;
+  box-shadow: 0px 3px 15px 1px rgba(0, 0, 0, 0.04);
+  margin: 0 auto;
+  padding: 2rem;
+  max-width: 800px;
+
+}
+
+.affiliate-panel h3 {
+  color: white;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.btn--white {
+  background-color: white;
+  border-radius: 2px;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: .5px;
+  padding-left: 20px;
+  padding-right: 20px;
+  border: none;
+  color: #007bff;
+  border: 2px solid white;
+  margin-top: 32px;
+}
+
+.btn--white:hover, .btn--white:focus {
+  color: white;
+  background-color: #007bff;
+  border-color: white;
+}
+
+</style>
+<div class="container mt-0 pt-0">
+  <div class="row mt-0 pt-0">
+    <div class="col mt-0 pt-0">
+      <form method="POST" action="/tool/AhrefsBacklinks/run">
+        <div class="form-group">
+          <label>Enter domain name that you would like to check for existing backlinks.</label>
+          <input type="text" class="form-control" id="targeturl" name="targeturl" placeholder="Target Domain (thehoth.com)" value="{{ @targeturl }}">
+        </div>
+        <div class="form-group">
+          <label>Select the query mode to use for this check</label>
+          <select class="form-control" id="mode" name="mode">
+            <option value="subdomains" {{ @mode == "subdomains" ? "selected" : "" }}>Domain with all it's subdomains (*.domain.com/*)</option>
+            <option value="domain" {{ @mode == "domain" ? "selected" : "" }}>Domain without subdomains (domain.com/*)</option>
+            <option value="prefix" {{ @mode == "prefix" ? "selected" : "" }}>URL Prefix (domain.com/path/*)</option>
+            <option value="exact" {{ @mode == "exact" ? "selected" : "" }}>Exact URL</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <div class="text-center">
+            <button type="submit" class="btn btn-danger btn-lg mt-2">View Backlinks Report</button>
+          </div>
+        </div>
+      </form>
+      <check if="{{ @resultBacklinks }}">
+      <hr class="mt-5 mb-4">
+      
+      <div class="mt-4">
     <div class="row">
-      <div class="col-sm-12 col-md-4 col-lg-4">
-        <h3>Customer Information</h3>
-      </div>
-      <div class="col-sm-12 col-md-8 col-lg-8">
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="card-link">Card link</a>
-              <a href="#" class="card-link">Another link</a>
-            </div>
-            </div>
-          </div>
+      <div class="col-sm-12 col-lg-6">
+        <div class="text--bold">Backlinks Report for</div>
+        <div class="domain-panel__domain-container">
+          <div class="text__font-size--24 domain-panel__domain">thehoth.com</div>
         </div>
-
-        <div class="row">
-          <div class="col-sm-12 col-md-6 col-lg-6">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-12 col-md-6 col-lg-6">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-sm-12 col-md-6 col-lg-6">
-            <div class="row no no-gutters">
-              <div class="col-sm-12">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row no-gutters">
-              <div class="col-sm-12">
-                <div class="card">
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="card-link">Card link</a>
-                    <a href="#" class="card-link">Another link</a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-12 col-md-6 col-lg-6">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="card panel">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-
       </div>
     </div>
-  </div>   
+
+    <div class="container mb-5">
+        <div class="row metric-panel__group">
+          <div class="col-sm-12 pl-0">
+            <h3 class="metric__section-heading">Backlink Metrics</h3>
+          </div>
+          <div class="col-sm-12 col-lg-3 metric-panel__panel metric-panel--blue">
+            <div class="metric-panel__number">69901</div>
+            <div class="metric-panel__title">Total External Backlinks</div>
+          </div>
+          <div class="col-sm-12 col-lg-3 metric-panel__panel metric-panel--purple">
+            <div class="metric-panel__number">1659</div>
+            <div class="metric-panel__title">Total Referring Domains</div>
+          </div>
+          <div class="col-sm-12 col-lg-3 metric-panel__panel metric-panel--pink">
+            <div class="metric-panel__number">30 <span class="metric-panel__unit">%</span></div>
+            <div class="metric-panel__title">Dofollow Backlinks</div>
+          </div>
+          <div class="col-sm-12 col-lg-3 metric-panel__panel metric-panel--orange">
+            <div class="metric-panel__number">1497</div>
+            <div class="metric-panel__title">Referring IP's</div>
+          </div>
+        </div>
+    </div>
+
+<div class="affiliate-panel mb-5" role="alert">
+  <div class="row">
+    <div class="col-sm-12 col-lg-8"> 
+      <h3>Want more links?</h3>
+      <p>This report is limited to the top backlinks pointing at your page and shows only 1 link per page. 
+      </p>
+    </div>
+    <div class="col-sm-12 col-lg-4 text-center"> 
+      <a href="https://ahrefs.evyy.net/c/1262984/299887/4653" target="_blank" class="btn btn--white">View All Links</a>
+    </div>
+  </div>
+</div>
+
+
+    <style>.table th {border-top:inherit;}</style>
+    <table class="table table--shadow table-responsive">
+      <thead>
+        <tr>
+          <th scope="col" style="width: 24px;"></th>
+          <th scope="col" style="width: 52%;">URL</th>
+          <th scope="col" style="width: 23%; min-width: 100px;">Anchor Text</th>
+          <th scope="col" style="width: 10%; min-width: 60px;" data-toggle="tooltip" title="" data-original-title="Nofollow links pass no rankings benefit; Dofollow links pass link juice to the target site.">Nofollow</th>
+          <th style="width: 15%; min-width: 100px;" scope="col" data-toggle="tooltip" title="" data-original-title="Domain Rating is a proprietary Ahrefs’ metric that shows the strength of a target website’s total backlink profile (in terms of its size and quality).">Ahrefs DR</th>
+        </tr>
+      </thead>
+      <tbody>
+                  <tr>
+            <td style="vertical-align: top; padding-top: 9px;">
+              <img src="https://plus.google.com/_/favicon?domain=https://www.contentmarketingworld.com/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.contentmarketingworld.com/" target="_blank">https://www.contentmarketingworld.com/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/" target="_blank">https://www.thehoth.com/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              The Hoth            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">75 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 75%;" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/search-engine-spider-simulator.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/search-engine-spider-simulator.php" target="_blank">http://www.webconfs.com/search-engine-spider-simulator.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/" target="_blank">https://www.thehoth.com/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              White Label SEO            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/search-engine-spider-simulator.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/search-engine-spider-simulator.php" target="_blank">http://www.webconfs.com/search-engine-spider-simulator.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blog/how-to-get-white-hat-links/" target="_blank">https://www.thehoth.com/blog/how-to-get-white-hat-links/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              How to Get Whitehat Links            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/search-engine-spider-simulator.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/search-engine-spider-simulator.php" target="_blank">http://www.webconfs.com/search-engine-spider-simulator.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blog/how-to-press-release/" target="_blank">https://www.thehoth.com/blog/how-to-press-release/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              How &amp; Why to Use a Press R...            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/search-engine-spider-simulator.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/search-engine-spider-simulator.php" target="_blank">http://www.webconfs.com/search-engine-spider-simulator.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blog/seo-strategy/" target="_blank">https://www.thehoth.com/blog/seo-strategy/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              2016 SEO Strategy Template            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/search-engine-spider-simulator.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/search-engine-spider-simulator.php" target="_blank">http://www.webconfs.com/search-engine-spider-simulator.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blogger/" target="_blank">https://www.thehoth.com/blogger/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Blog Writing Service            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/search-engine-spider-simulator.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/search-engine-spider-simulator.php" target="_blank">http://www.webconfs.com/search-engine-spider-simulator.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/guestpost/" target="_blank">https://www.thehoth.com/guestpost/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Guest Posting Service            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/search-engine-spider-simulator.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/search-engine-spider-simulator.php" target="_blank">http://www.webconfs.com/search-engine-spider-simulator.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/hoth-x/" target="_blank">https://www.thehoth.com/hoth-x/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Managed SEO            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/search-engine-spider-simulator.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/search-engine-spider-simulator.php" target="_blank">http://www.webconfs.com/search-engine-spider-simulator.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/hoth-x/?aff=71BI" target="_blank">https://www.thehoth.com/hoth-x/?aff=71BI</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Managed SEO            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/search-engine-spider-simulator.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/search-engine-spider-simulator.php" target="_blank">http://www.webconfs.com/search-engine-spider-simulator.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/local/" target="_blank">https://www.thehoth.com/local/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Local SEO Services            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.siteuptime.com/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.siteuptime.com/" target="_blank">https://www.siteuptime.com/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/" target="_blank">https://www.thehoth.com/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              TheHOTH            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">76 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 76%;" aria-valuenow="76" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.webconfs.com/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.webconfs.com/" target="_blank">https://www.webconfs.com/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/" target="_blank">https://www.thehoth.com/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              White Label SEO            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.webconfs.com/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.webconfs.com/" target="_blank">https://www.webconfs.com/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blog/how-to-get-white-hat-links/" target="_blank">https://www.thehoth.com/blog/how-to-get-white-hat-links/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              How to Get Whitehat Links            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.webconfs.com/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.webconfs.com/" target="_blank">https://www.webconfs.com/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blog/how-to-press-release/" target="_blank">https://www.thehoth.com/blog/how-to-press-release/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              How &amp; Why to Use a Press R...            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.webconfs.com/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.webconfs.com/" target="_blank">https://www.webconfs.com/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blog/seo-strategy/" target="_blank">https://www.thehoth.com/blog/seo-strategy/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              2016 SEO Strategy Template            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.webconfs.com/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.webconfs.com/" target="_blank">https://www.webconfs.com/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blogger/" target="_blank">https://www.thehoth.com/blogger/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Blog Writing Service            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.webconfs.com/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.webconfs.com/" target="_blank">https://www.webconfs.com/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/guestpost/" target="_blank">https://www.thehoth.com/guestpost/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Guest Posting Service            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.webconfs.com/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.webconfs.com/" target="_blank">https://www.webconfs.com/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/local/" target="_blank">https://www.thehoth.com/local/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Local SEO Services            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.searchenginejournal.com/seo-101/seo-statistics/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.searchenginejournal.com/seo-101/seo-statistics/" target="_blank">https://www.searchenginejournal.com/seo-101/seo-statistics/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://go.thehoth.com/seo-case-studies-webinar" target="_blank">https://go.thehoth.com/seo-case-studies-webinar</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              [FREE LIVE Training] SEO Case ...            </td>
+            <td><span class="badge badge-secondary">nofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">88 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            
+            bg-success" role="progressbar" style="width: 88%;" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.searchenginejournal.com/seo-101/seo-statistics/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.searchenginejournal.com/seo-101/seo-statistics/" target="_blank">https://www.searchenginejournal.com/seo-101/seo-statistics/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://go.thehoth.com/seo-case-studies-webinar?imt=1" target="_blank">https://go.thehoth.com/seo-case-studies-webinar?imt=1</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              [FREE LIVE Training] SEO Case ...            </td>
+            <td><span class="badge badge-secondary">nofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">88 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            
+            bg-success" role="progressbar" style="width: 88%;" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/anchor-text-analysis.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/anchor-text-analysis.php" target="_blank">http://www.webconfs.com/anchor-text-analysis.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/" target="_blank">https://www.thehoth.com/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              White Label SEO            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/anchor-text-analysis.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/anchor-text-analysis.php" target="_blank">http://www.webconfs.com/anchor-text-analysis.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blog/how-to-get-white-hat-links/" target="_blank">https://www.thehoth.com/blog/how-to-get-white-hat-links/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              How to Get Whitehat Links            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/anchor-text-analysis.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/anchor-text-analysis.php" target="_blank">http://www.webconfs.com/anchor-text-analysis.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blog/how-to-press-release/" target="_blank">https://www.thehoth.com/blog/how-to-press-release/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              How &amp; Why to Use a Press R...            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/anchor-text-analysis.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/anchor-text-analysis.php" target="_blank">http://www.webconfs.com/anchor-text-analysis.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blog/seo-strategy/" target="_blank">https://www.thehoth.com/blog/seo-strategy/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              2016 SEO Strategy Template            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/anchor-text-analysis.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/anchor-text-analysis.php" target="_blank">http://www.webconfs.com/anchor-text-analysis.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blogger/" target="_blank">https://www.thehoth.com/blogger/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Blog Writing Service            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/anchor-text-analysis.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/anchor-text-analysis.php" target="_blank">http://www.webconfs.com/anchor-text-analysis.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/guestpost/" target="_blank">https://www.thehoth.com/guestpost/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Guest Posting Service            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/anchor-text-analysis.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/anchor-text-analysis.php" target="_blank">http://www.webconfs.com/anchor-text-analysis.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/hoth-x/" target="_blank">https://www.thehoth.com/hoth-x/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Managed SEO            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/anchor-text-analysis.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/anchor-text-analysis.php" target="_blank">http://www.webconfs.com/anchor-text-analysis.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/hoth-x/?aff=71BI" target="_blank">https://www.thehoth.com/hoth-x/?aff=71BI</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Managed SEO            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/anchor-text-analysis.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/anchor-text-analysis.php" target="_blank">http://www.webconfs.com/anchor-text-analysis.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/local/" target="_blank">https://www.thehoth.com/local/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Local SEO Services            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.searchenginejournal.com/category/search-engine-optimization/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.searchenginejournal.com/category/search-engine-optimization/" target="_blank">https://www.searchenginejournal.com/category/search-engine-optimization/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/seo-reseller/" target="_blank">https://www.thehoth.com/seo-reseller/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              How To Sell SEO Like A Champio...            </td>
+            <td><span class="badge badge-secondary">nofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">88 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            
+            bg-success" role="progressbar" style="width: 88%;" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.searchenginejournal.com/category/search-engine-optimization/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.searchenginejournal.com/category/search-engine-optimization/" target="_blank">https://www.searchenginejournal.com/category/search-engine-optimization/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/seo-reseller/?imt=1" target="_blank">https://www.thehoth.com/seo-reseller/?imt=1</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              How To Sell SEO Like A Champio...            </td>
+            <td><span class="badge badge-secondary">nofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">88 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            
+            bg-success" role="progressbar" style="width: 88%;" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.webconfs.com/seo-tools/keyword-density-checker/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.webconfs.com/seo-tools/keyword-density-checker/" target="_blank">https://www.webconfs.com/seo-tools/keyword-density-checker/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/" target="_blank">https://www.thehoth.com/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              White Label SEO            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.webconfs.com/seo-tools/keyword-density-checker/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.webconfs.com/seo-tools/keyword-density-checker/" target="_blank">https://www.webconfs.com/seo-tools/keyword-density-checker/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blog/how-to-get-white-hat-links/" target="_blank">https://www.thehoth.com/blog/how-to-get-white-hat-links/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              How to Get Whitehat Links            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.webconfs.com/seo-tools/keyword-density-checker/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.webconfs.com/seo-tools/keyword-density-checker/" target="_blank">https://www.webconfs.com/seo-tools/keyword-density-checker/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blog/how-to-press-release/" target="_blank">https://www.thehoth.com/blog/how-to-press-release/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              How &amp; Why to Use a Press R...            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.webconfs.com/seo-tools/keyword-density-checker/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.webconfs.com/seo-tools/keyword-density-checker/" target="_blank">https://www.webconfs.com/seo-tools/keyword-density-checker/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blog/seo-strategy/" target="_blank">https://www.thehoth.com/blog/seo-strategy/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              2016 SEO Strategy Template            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.webconfs.com/seo-tools/keyword-density-checker/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.webconfs.com/seo-tools/keyword-density-checker/" target="_blank">https://www.webconfs.com/seo-tools/keyword-density-checker/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blogger/" target="_blank">https://www.thehoth.com/blogger/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Blog Writing Service            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.webconfs.com/seo-tools/keyword-density-checker/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.webconfs.com/seo-tools/keyword-density-checker/" target="_blank">https://www.webconfs.com/seo-tools/keyword-density-checker/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/guestpost/" target="_blank">https://www.thehoth.com/guestpost/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Guest Posting Service            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.webconfs.com/seo-tools/keyword-density-checker/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.webconfs.com/seo-tools/keyword-density-checker/" target="_blank">https://www.webconfs.com/seo-tools/keyword-density-checker/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/local/" target="_blank">https://www.thehoth.com/local/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Local SEO Services            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webtoolhub.com/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webtoolhub.com/" target="_blank">http://www.webtoolhub.com/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/link-building-service/" target="_blank">https://www.thehoth.com/link-building-service/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Affordable Link Building            </td>
+            <td><span class="badge badge-secondary">nofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">70 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webtoolhub.com/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webtoolhub.com/" target="_blank">http://www.webtoolhub.com/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/link-building-service/?aff=ST03" target="_blank">https://www.thehoth.com/link-building-service/?aff=ST03</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Affordable Link Building            </td>
+            <td><span class="badge badge-secondary">nofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">70 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 70%;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.searchenginejournal.com/4-important-ranking-factors-according-seo-industry-studies/184619/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.searchenginejournal.com/4-important-ranking-factors-according-seo-industry-studies/184619/" target="_blank">https://www.searchenginejournal.com/4-important-ranking-factors-according-s...</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://go.thehoth.com/google-code-webinar?imt=1" target="_blank">https://go.thehoth.com/google-code-webinar?imt=1</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              [FREE Training] Cracking The G...            </td>
+            <td><span class="badge badge-secondary">nofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">88 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            
+            bg-success" role="progressbar" style="width: 88%;" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.searchenginejournal.com/4-important-ranking-factors-according-seo-industry-studies/184619/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.searchenginejournal.com/4-important-ranking-factors-according-seo-industry-studies/184619/" target="_blank">https://www.searchenginejournal.com/4-important-ranking-factors-according-s...</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://go.thehoth.com/webinar-registration12688406" target="_blank">https://go.thehoth.com/webinar-registration12688406</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              [FREE Training] Cracking The G...            </td>
+            <td><span class="badge badge-secondary">nofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">88 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            
+            bg-success" role="progressbar" style="width: 88%;" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.searchenginejournal.com/4-important-ranking-factors-according-seo-industry-studies/184619/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.searchenginejournal.com/4-important-ranking-factors-according-seo-industry-studies/184619/" target="_blank">https://www.searchenginejournal.com/4-important-ranking-factors-according-s...</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://go.thehoth.com/webinar-registration12688406?imt=1" target="_blank">https://go.thehoth.com/webinar-registration12688406?imt=1</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              [FREE Training] Cracking The G...            </td>
+            <td><span class="badge badge-secondary">nofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">88 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            
+            bg-success" role="progressbar" style="width: 88%;" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.webconfs.com/154/301-redirects-how-to-redirect-your-website/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.webconfs.com/154/301-redirects-how-to-redirect-your-website/" target="_blank">https://www.webconfs.com/154/301-redirects-how-to-redirect-your-website/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/" target="_blank">https://www.thehoth.com/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              White Label SEO            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.webconfs.com/154/301-redirects-how-to-redirect-your-website/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.webconfs.com/154/301-redirects-how-to-redirect-your-website/" target="_blank">https://www.webconfs.com/154/301-redirects-how-to-redirect-your-website/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blog/how-to-get-white-hat-links/" target="_blank">https://www.thehoth.com/blog/how-to-get-white-hat-links/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              How to Get Whitehat Links            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.webconfs.com/154/301-redirects-how-to-redirect-your-website/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.webconfs.com/154/301-redirects-how-to-redirect-your-website/" target="_blank">https://www.webconfs.com/154/301-redirects-how-to-redirect-your-website/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blog/how-to-press-release/" target="_blank">https://www.thehoth.com/blog/how-to-press-release/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              How &amp; Why to Use a Press R...            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.webconfs.com/154/301-redirects-how-to-redirect-your-website/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.webconfs.com/154/301-redirects-how-to-redirect-your-website/" target="_blank">https://www.webconfs.com/154/301-redirects-how-to-redirect-your-website/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blog/seo-strategy/" target="_blank">https://www.thehoth.com/blog/seo-strategy/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              2016 SEO Strategy Template            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.webconfs.com/154/301-redirects-how-to-redirect-your-website/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.webconfs.com/154/301-redirects-how-to-redirect-your-website/" target="_blank">https://www.webconfs.com/154/301-redirects-how-to-redirect-your-website/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blogger/" target="_blank">https://www.thehoth.com/blogger/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Blog Writing Service            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.webconfs.com/154/301-redirects-how-to-redirect-your-website/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.webconfs.com/154/301-redirects-how-to-redirect-your-website/" target="_blank">https://www.webconfs.com/154/301-redirects-how-to-redirect-your-website/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/guestpost/" target="_blank">https://www.thehoth.com/guestpost/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Guest Posting Service            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.webconfs.com/154/301-redirects-how-to-redirect-your-website/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.webconfs.com/154/301-redirects-how-to-redirect-your-website/" target="_blank">https://www.webconfs.com/154/301-redirects-how-to-redirect-your-website/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/local/" target="_blank">https://www.thehoth.com/local/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Local SEO Services            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.searchenginejournal.com/10-stats-to-justify-seo/36762/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.searchenginejournal.com/10-stats-to-justify-seo/36762/" target="_blank">https://www.searchenginejournal.com/10-stats-to-justify-seo/36762/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://go.thehoth.com/google-code-webinar?imt=1" target="_blank">https://go.thehoth.com/google-code-webinar?imt=1</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              [FREE Training] Cracking The G...            </td>
+            <td><span class="badge badge-secondary">nofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">88 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            
+            bg-success" role="progressbar" style="width: 88%;" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.searchenginejournal.com/10-stats-to-justify-seo/36762/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.searchenginejournal.com/10-stats-to-justify-seo/36762/" target="_blank">https://www.searchenginejournal.com/10-stats-to-justify-seo/36762/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://go.thehoth.com/webinar-registration12688406" target="_blank">https://go.thehoth.com/webinar-registration12688406</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              [FREE Training] Cracking The G...            </td>
+            <td><span class="badge badge-secondary">nofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">88 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            
+            bg-success" role="progressbar" style="width: 88%;" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.searchenginejournal.com/10-stats-to-justify-seo/36762/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.searchenginejournal.com/10-stats-to-justify-seo/36762/" target="_blank">https://www.searchenginejournal.com/10-stats-to-justify-seo/36762/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://go.thehoth.com/webinar-registration12688406?imt=1" target="_blank">https://go.thehoth.com/webinar-registration12688406?imt=1</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              [FREE Training] Cracking The G...            </td>
+            <td><span class="badge badge-secondary">nofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">88 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            
+            bg-success" role="progressbar" style="width: 88%;" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://internetsummit.com/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://internetsummit.com/" target="_blank">https://internetsummit.com/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/" target="_blank">https://www.thehoth.com/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              The HOTH            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">58 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 58%;" aria-valuenow="58" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.searchenginejournal.com/101-quick-seo-tips/180563/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.searchenginejournal.com/101-quick-seo-tips/180563/" target="_blank">https://www.searchenginejournal.com/101-quick-seo-tips/180563/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://go.thehoth.com/google-code-webinar?imt=1" target="_blank">https://go.thehoth.com/google-code-webinar?imt=1</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              [FREE Training] Cracking The G...            </td>
+            <td><span class="badge badge-secondary">nofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">88 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            
+            bg-success" role="progressbar" style="width: 88%;" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.searchenginejournal.com/101-quick-seo-tips/180563/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.searchenginejournal.com/101-quick-seo-tips/180563/" target="_blank">https://www.searchenginejournal.com/101-quick-seo-tips/180563/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://go.thehoth.com/webinar-registration12688406" target="_blank">https://go.thehoth.com/webinar-registration12688406</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              [FREE Training] Cracking The G...            </td>
+            <td><span class="badge badge-secondary">nofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">88 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            
+            bg-success" role="progressbar" style="width: 88%;" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.searchenginejournal.com/101-quick-seo-tips/180563/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.searchenginejournal.com/101-quick-seo-tips/180563/" target="_blank">https://www.searchenginejournal.com/101-quick-seo-tips/180563/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://go.thehoth.com/webinar-registration12688406?imt=1" target="_blank">https://go.thehoth.com/webinar-registration12688406?imt=1</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              [FREE Training] Cracking The G...            </td>
+            <td><span class="badge badge-secondary">nofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">88 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            
+            bg-success" role="progressbar" style="width: 88%;" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.thehoth.co/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.thehoth.co/" target="_blank">https://www.thehoth.co/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blog/" target="_blank">https://www.thehoth.com/blog/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Blog            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">63 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 63%;" aria-valuenow="63" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.thehoth.co/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.thehoth.co/" target="_blank">https://www.thehoth.co/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/contact/" target="_blank">https://www.thehoth.com/contact/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Contact            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">63 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 63%;" aria-valuenow="63" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.thehoth.co/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.thehoth.co/" target="_blank">https://www.thehoth.co/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/hoth-x/" target="_blank">https://www.thehoth.com/hoth-x/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              fully managed seo outsourcing            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">63 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 63%;" aria-valuenow="63" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.thehoth.co/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.thehoth.co/" target="_blank">https://www.thehoth.co/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/signup" target="_blank">https://www.thehoth.com/signup</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Get A Free HOTH Account!            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">63 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 63%;" aria-valuenow="63" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.thehoth.co/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.thehoth.co/" target="_blank">https://www.thehoth.co/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/signup/" target="_blank">https://www.thehoth.com/signup/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Get A Free HOTH Account!            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">63 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 63%;" aria-valuenow="63" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.thehoth.co/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.thehoth.co/" target="_blank">https://www.thehoth.co/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/terms-of-service/" target="_blank">https://www.thehoth.com/terms-of-service/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Terms Of Service            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">63 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 63%;" aria-valuenow="63" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.thehoth.co/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.thehoth.co/" target="_blank">https://www.thehoth.co/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="http://www.thehoth.com/terms-of-service/" target="_blank">http://www.thehoth.com/terms-of-service/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Terms Of Service            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">63 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 63%;" aria-valuenow="63" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.searchenginejournal.com/seo-friendly-url-structure-2/202790/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.searchenginejournal.com/seo-friendly-url-structure-2/202790/" target="_blank">https://www.searchenginejournal.com/seo-friendly-url-structure-2/202790/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://go.thehoth.com/google-code-webinar?imt=1" target="_blank">https://go.thehoth.com/google-code-webinar?imt=1</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              [FREE Training] Cracking The G...            </td>
+            <td><span class="badge badge-secondary">nofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">88 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            
+            bg-success" role="progressbar" style="width: 88%;" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.searchenginejournal.com/seo-friendly-url-structure-2/202790/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.searchenginejournal.com/seo-friendly-url-structure-2/202790/" target="_blank">https://www.searchenginejournal.com/seo-friendly-url-structure-2/202790/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://go.thehoth.com/webinar-registration12688406" target="_blank">https://go.thehoth.com/webinar-registration12688406</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              [FREE Training] Cracking The G...            </td>
+            <td><span class="badge badge-secondary">nofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">88 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            
+            bg-success" role="progressbar" style="width: 88%;" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.searchenginejournal.com/seo-friendly-url-structure-2/202790/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.searchenginejournal.com/seo-friendly-url-structure-2/202790/" target="_blank">https://www.searchenginejournal.com/seo-friendly-url-structure-2/202790/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://go.thehoth.com/webinar-registration12688406?imt=1" target="_blank">https://go.thehoth.com/webinar-registration12688406?imt=1</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              [FREE Training] Cracking The G...            </td>
+            <td><span class="badge badge-secondary">nofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">88 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            
+            bg-success" role="progressbar" style="width: 88%;" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/15-minute-seo.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/15-minute-seo.php" target="_blank">http://www.webconfs.com/15-minute-seo.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/" target="_blank">https://www.thehoth.com/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              White Label SEO            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/15-minute-seo.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/15-minute-seo.php" target="_blank">http://www.webconfs.com/15-minute-seo.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blog/how-to-get-white-hat-links/" target="_blank">https://www.thehoth.com/blog/how-to-get-white-hat-links/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              How to Get Whitehat Links            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/15-minute-seo.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/15-minute-seo.php" target="_blank">http://www.webconfs.com/15-minute-seo.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blog/how-to-press-release/" target="_blank">https://www.thehoth.com/blog/how-to-press-release/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              How &amp; Why to Use a Press R...            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/15-minute-seo.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/15-minute-seo.php" target="_blank">http://www.webconfs.com/15-minute-seo.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blog/seo-strategy/" target="_blank">https://www.thehoth.com/blog/seo-strategy/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              2016 SEO Strategy Template            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/15-minute-seo.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/15-minute-seo.php" target="_blank">http://www.webconfs.com/15-minute-seo.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blogger/" target="_blank">https://www.thehoth.com/blogger/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Blog Writing Service            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/15-minute-seo.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/15-minute-seo.php" target="_blank">http://www.webconfs.com/15-minute-seo.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/guestpost/" target="_blank">https://www.thehoth.com/guestpost/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Guest Posting Service            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/15-minute-seo.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/15-minute-seo.php" target="_blank">http://www.webconfs.com/15-minute-seo.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/local/" target="_blank">https://www.thehoth.com/local/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Local SEO Services            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.searchenginejournal.com/latent-semantic-indexing-wont-help-seo/240705/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.searchenginejournal.com/latent-semantic-indexing-wont-help-seo/240705/" target="_blank">https://www.searchenginejournal.com/latent-semantic-indexing-wont-help-seo/...</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://go.thehoth.com/seo-case-studies-webinar" target="_blank">https://go.thehoth.com/seo-case-studies-webinar</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              [FREE LIVE Training] SEO Case ...            </td>
+            <td><span class="badge badge-secondary">nofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">88 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            
+            bg-success" role="progressbar" style="width: 88%;" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.searchenginejournal.com/latent-semantic-indexing-wont-help-seo/240705/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.searchenginejournal.com/latent-semantic-indexing-wont-help-seo/240705/" target="_blank">https://www.searchenginejournal.com/latent-semantic-indexing-wont-help-seo/...</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://go.thehoth.com/seo-case-studies-webinar?imt=1" target="_blank">https://go.thehoth.com/seo-case-studies-webinar?imt=1</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              [FREE LIVE Training] SEO Case ...            </td>
+            <td><span class="badge badge-secondary">nofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">88 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            
+            bg-success" role="progressbar" style="width: 88%;" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/redirect-check.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/redirect-check.php" target="_blank">http://www.webconfs.com/redirect-check.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/" target="_blank">https://www.thehoth.com/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              White Label SEO            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/redirect-check.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/redirect-check.php" target="_blank">http://www.webconfs.com/redirect-check.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blog/how-to-get-white-hat-links/" target="_blank">https://www.thehoth.com/blog/how-to-get-white-hat-links/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              How to Get Whitehat Links            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/redirect-check.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/redirect-check.php" target="_blank">http://www.webconfs.com/redirect-check.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blog/how-to-press-release/" target="_blank">https://www.thehoth.com/blog/how-to-press-release/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              How &amp; Why to Use a Press R...            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/redirect-check.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/redirect-check.php" target="_blank">http://www.webconfs.com/redirect-check.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blog/seo-strategy/" target="_blank">https://www.thehoth.com/blog/seo-strategy/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              2016 SEO Strategy Template            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/redirect-check.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/redirect-check.php" target="_blank">http://www.webconfs.com/redirect-check.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blogger/" target="_blank">https://www.thehoth.com/blogger/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Blog Writing Service            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/redirect-check.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/redirect-check.php" target="_blank">http://www.webconfs.com/redirect-check.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/guestpost/" target="_blank">https://www.thehoth.com/guestpost/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Guest Posting Service            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/redirect-check.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/redirect-check.php" target="_blank">http://www.webconfs.com/redirect-check.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/hoth-x/" target="_blank">https://www.thehoth.com/hoth-x/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Managed SEO            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/redirect-check.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/redirect-check.php" target="_blank">http://www.webconfs.com/redirect-check.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/hoth-x/?aff=71BI" target="_blank">https://www.thehoth.com/hoth-x/?aff=71BI</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Managed SEO            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/redirect-check.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/redirect-check.php" target="_blank">http://www.webconfs.com/redirect-check.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/local/" target="_blank">https://www.thehoth.com/local/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Local SEO Services            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/importance-of-backlinks-article-5.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/importance-of-backlinks-article-5.php" target="_blank">http://www.webconfs.com/importance-of-backlinks-article-5.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/" target="_blank">https://www.thehoth.com/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              White Label SEO            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/importance-of-backlinks-article-5.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/importance-of-backlinks-article-5.php" target="_blank">http://www.webconfs.com/importance-of-backlinks-article-5.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blog/how-to-get-white-hat-links/" target="_blank">https://www.thehoth.com/blog/how-to-get-white-hat-links/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              How to Get Whitehat Links            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/importance-of-backlinks-article-5.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/importance-of-backlinks-article-5.php" target="_blank">http://www.webconfs.com/importance-of-backlinks-article-5.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blog/how-to-press-release/" target="_blank">https://www.thehoth.com/blog/how-to-press-release/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              How &amp; Why to Use a Press R...            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/importance-of-backlinks-article-5.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/importance-of-backlinks-article-5.php" target="_blank">http://www.webconfs.com/importance-of-backlinks-article-5.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blog/seo-strategy/" target="_blank">https://www.thehoth.com/blog/seo-strategy/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              2016 SEO Strategy Template            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/importance-of-backlinks-article-5.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/importance-of-backlinks-article-5.php" target="_blank">http://www.webconfs.com/importance-of-backlinks-article-5.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/blogger/" target="_blank">https://www.thehoth.com/blogger/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Blog Writing Service            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/importance-of-backlinks-article-5.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/importance-of-backlinks-article-5.php" target="_blank">http://www.webconfs.com/importance-of-backlinks-article-5.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/guestpost/" target="_blank">https://www.thehoth.com/guestpost/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Guest Posting Service            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/importance-of-backlinks-article-5.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/importance-of-backlinks-article-5.php" target="_blank">http://www.webconfs.com/importance-of-backlinks-article-5.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/hoth-x/" target="_blank">https://www.thehoth.com/hoth-x/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Managed SEO            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/importance-of-backlinks-article-5.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/importance-of-backlinks-article-5.php" target="_blank">http://www.webconfs.com/importance-of-backlinks-article-5.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/hoth-x/?aff=71BI" target="_blank">https://www.thehoth.com/hoth-x/?aff=71BI</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Managed SEO            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=http://www.webconfs.com/importance-of-backlinks-article-5.php" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="http://www.webconfs.com/importance-of-backlinks-article-5.php" target="_blank">http://www.webconfs.com/importance-of-backlinks-article-5.php</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/local/" target="_blank">https://www.thehoth.com/local/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Local SEO Services            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">77 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 77%;" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.searchenginejournal.com/seo-101/best-seo-resources/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.searchenginejournal.com/seo-101/best-seo-resources/" target="_blank">https://www.searchenginejournal.com/seo-101/best-seo-resources/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://go.thehoth.com/google-code-webinar?imt=1" target="_blank">https://go.thehoth.com/google-code-webinar?imt=1</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              [FREE Training] Cracking The G...            </td>
+            <td><span class="badge badge-secondary">nofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">88 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            
+            bg-success" role="progressbar" style="width: 88%;" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.searchenginejournal.com/seo-101/best-seo-resources/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.searchenginejournal.com/seo-101/best-seo-resources/" target="_blank">https://www.searchenginejournal.com/seo-101/best-seo-resources/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://go.thehoth.com/webinar-registration12688406" target="_blank">https://go.thehoth.com/webinar-registration12688406</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              [FREE Training] Cracking The G...            </td>
+            <td><span class="badge badge-secondary">nofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">88 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            
+            bg-success" role="progressbar" style="width: 88%;" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.searchenginejournal.com/seo-101/best-seo-resources/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.searchenginejournal.com/seo-101/best-seo-resources/" target="_blank">https://www.searchenginejournal.com/seo-101/best-seo-resources/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://go.thehoth.com/webinar-registration12688406?imt=1" target="_blank">https://go.thehoth.com/webinar-registration12688406?imt=1</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              [FREE Training] Cracking The G...            </td>
+            <td><span class="badge badge-secondary">nofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">88 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            
+            bg-success" role="progressbar" style="width: 88%;" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.searchenginejournal.com/20-essential-blog-directories-to-submit-your-blog-to/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.searchenginejournal.com/20-essential-blog-directories-to-submit-your-blog-to/" target="_blank">https://www.searchenginejournal.com/20-essential-blog-directories-to-submit...</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/seo-reseller/" target="_blank">https://www.thehoth.com/seo-reseller/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              How To Sell SEO Like A Champio...            </td>
+            <td><span class="badge badge-secondary">nofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">88 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            
+            bg-success" role="progressbar" style="width: 88%;" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://www.searchenginejournal.com/20-essential-blog-directories-to-submit-your-blog-to/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://www.searchenginejournal.com/20-essential-blog-directories-to-submit-your-blog-to/" target="_blank">https://www.searchenginejournal.com/20-essential-blog-directories-to-submit...</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/seo-reseller/?imt=1" target="_blank">https://www.thehoth.com/seo-reseller/?imt=1</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              How To Sell SEO Like A Champio...            </td>
+            <td><span class="badge badge-secondary">nofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">88 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            
+            bg-success" role="progressbar" style="width: 88%;" aria-valuenow="88" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+                  <tr>
+            <td>
+              <img src="https://plus.google.com/_/favicon?domain=https://psdlearning.com/" width="16" height="16">
+            </td>
+            <td style="font-size: 0.8rem; font-weight: 600">
+              <a href="https://psdlearning.com/" target="_blank">https://psdlearning.com/</a><br>
+              <span class="small ml-2 text-muted">↳ <a class="text-muted" href="https://www.thehoth.com/google-keyword-planner/" target="_blank">https://www.thehoth.com/google-keyword-planner/</a></span>
+            </td>
+            <td style="font-size:0.8rem; font-weight: 600; color: #464646">
+              Keyword Planner            </td>
+            <td><span class="badge badge-success">dofollow</span></td>
+            <td style="padding-top:0; padding-bottom: 0; vertical-align: top;" class="text-center">
+              <span style="font-size: 0.6rem; font-weight: 600; color: #464646;" class="p-0">54 / 100</span>
+              <div class="progress" style="height: 8px">
+                <div class="progress-bar 
+            bg-warning
+            " role="progressbar" style="width: 54%;" aria-valuenow="54" aria-valuemin="0" aria-valuemax="100">
+              
+            </div>
+              </div>
+              
+            </td>
+          </tr>
+              </tbody>
+    </table>
+  </div>
+    
+    </check>
+    <br /><br />
+  </div>
+</div>
 </div>

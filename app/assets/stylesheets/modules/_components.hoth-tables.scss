@@ -49,14 +49,7 @@
   }
 }
 
-.hoth-tables--dark {
-  background-color   : transparent;
 
-  thead {
-    color            : white;
-  }
-
-}
 
 .hoth-tables--simple {
   border             : none;
@@ -79,13 +72,11 @@
   }
 
   td { 
-    color            : white;
-    border-color     : white;
+    color            : $color__black--base;
+    border-color     : $color__gray--light;
     padding-top      : 12px;
     padding-bottom   : 12px;
     font-size        : 12px;
-    color            : white;
-    border-color     : white;
 
     &:first-of-type {
       padding-left   : 0;
@@ -95,4 +86,18 @@
       padding-right  : 0;
     }
   }
+}
+
+.hoth-tables--dark {
+  background-color   : transparent;
+
+  thead {
+    color            : white;
+  }
+
+  td {
+    color            : white;
+    border-color     : white;
+  }
+
 }

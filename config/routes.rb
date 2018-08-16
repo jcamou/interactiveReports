@@ -19,4 +19,7 @@ Rails.application.routes.draw do
   # Competitive Gap Analysis
   get   '/competitive_gap_analysis'     => 'competitive_gap_analysis#index'
 
+    # Competitive Gap Analysis
+  get   '/welcome'     => 'welcome#index'
+
 end

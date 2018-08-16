@@ -1,5 +1,7 @@
 {
   "name": "interactiveReporting",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "flag-icon-css": "^3.0.0"
+  }
 }
